@@ -666,6 +666,12 @@
 </div>
 
 <script>
+  // ── API Configuration ────────────────────────────────────────────────────
+  // TODO: Replace with your Anthropic API key
+  // Get your key at: https://console.anthropic.com/settings/keys
+  // WARNING: Do not commit this file to a public repository with your key filled in.
+  const API_KEY = " ";
+
   let csvData = [], headers = [], selectedAgency = "S&P";
   let mismatchResults = [], debtResults = [];
 
@@ -864,7 +870,12 @@ Important rules:
 
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": API_KEY,
+        "anthropic-version": "2023-06-01",
+        "anthropic-dangerous-direct-browser-access": "true"
+      },
       body: JSON.stringify({
         model: "claude-sonnet-4-20250514",
         max_tokens: 1000,
